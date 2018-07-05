@@ -1,0 +1,24 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="bamboo-applitools-plugin"/>
+    
+    <!-- add our web resources -->
+    <web-resource key="bamboo-applitools-plugin-resources" name="bamboo-applitools-plugin Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        
+        <resource type="download" name="bamboo-applitools-plugin.css" location="/css/bamboo-applitools-plugin.css"/>
+        <resource type="download" name="bamboo-applitools-plugin.js" location="/js/bamboo-applitools-plugin.js"/>
+        <resource type="download" name="images/" location="/images"/>
+
+        <context>bamboo-applitools-plugin</context>
+    </web-resource>
+    
+</atlassian-plugin>

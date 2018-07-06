@@ -1,0 +1,5 @@
+[@ww.textfield labelKey="applitools.api.key.label" name="APPLITOOLS_API_KEY" required='true'/]
+[@ww.textfield labelKey="sauce.user.name.label" name="SAUCE_USERNAME" required='false'/]
+[@ww.textfield labelKey="sauce.access.key.label" name="SAUCE_ACCESS_KEY" required='false'/]
+[@ww.textfield labelKey="executable.label" name="command" required='true'/]
+[@ww.textfield labelKey="executable.params.label" name="params" required='false'/]

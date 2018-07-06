@@ -7,6 +7,12 @@
         <param name="plugin-logo">images/pluginLogo.png</param>
     </plugin-info>
 
+    <taskType key="ApplitoolsTestsTask" name="Applitools Tests Task" class="com.applitools.bamboo.applitoolsTaskRunner">
+        <description>A task that runs Applitools visual tests</description>
+        <configuration class="com.applitools.bamboo.applitoolsTaskConfigurator"/>
+        <resource type="freemarker" name="edit" location="/taskConfigurator/editApplitoolsTask.ftl"/>
+    </taskType>
+
     <!-- add our i18n resource -->
     <resource type="i18n" name="i18n" location="bamboo-applitools-plugin"/>
     

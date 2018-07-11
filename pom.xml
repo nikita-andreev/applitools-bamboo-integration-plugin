@@ -113,6 +113,12 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.7</version>
         </dependency>
+        <dependency>
+            <groupId>com.atlassian.utils</groupId>
+            <artifactId>atlassian-processutils</artifactId>
+            <version>1.7.9</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

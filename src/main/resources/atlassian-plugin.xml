@@ -7,9 +7,9 @@
         <param name="plugin-logo">images/pluginLogo.png</param>
     </plugin-info>
 
-    <taskType key="ApplitoolsTestsTask" name="Applitools Tests Task" class="com.applitools.bamboo.applitoolsTaskRunner">
+    <taskType key="ApplitoolsTestsTask" name="Applitools Tests Task" class="com.applitools.bamboo.ApplitoolsTaskRunner">
         <description>A task that runs Applitools visual tests</description>
-        <configuration class="com.applitools.bamboo.applitoolsTaskConfigurator"/>
+        <configuration class="com.applitools.bamboo.ApplitoolsTaskConfigurator"/>
         <resource type="freemarker" name="edit" location="/taskConfigurator/editApplitoolsTask.ftl"/>
     </taskType>
 

@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 @Scanned
 public class ApplitoolsTaskRunner implements TaskType{
+    private static final String BATCH_ID = "APPLITOOLS_BATCH_ID";
     @ComponentImport
     private final ProcessService processService;
 
@@ -29,10 +30,12 @@ public class ApplitoolsTaskRunner implements TaskType{
         ExternalProcessBuilder processBuilder = new ExternalProcessBuilder();
         ConfigurationMap configMap = taskContext.getConfigurationMap();
 
+        String batchId = PlanUidUtils.getBatchId(taskContext.getBuildContext().getTypedPlanKey().getKey(), taskContext.getBuildContext().getBuildNumber());
+
         processBuilder.commandFromString(configMap.get(ApplitoolsTaskConfigurator.COMMAND) + " " + configMap.get(ApplitoolsTaskConfigurator.COMMAND_PARAMS))
                 .workingDirectory(taskContext.getWorkingDirectory())
                 .env(ApplitoolsTaskConfigurator.APPLITOOLS_API_KEY, configMap.get(ApplitoolsTaskConfigurator.APPLITOOLS_API_KEY))
-                .env("APPLITOOLS_BATCH_ID", taskContext.getBuildContext().getBuildKey().toString());
+                .env(BATCH_ID, batchId);
 
         EnvVarsParser envVarsParser = new EnvVarsParser(configMap.get(ApplitoolsTaskConfigurator.ENVIRONMENT_VARIABLES));
 
@@ -45,9 +48,8 @@ public class ApplitoolsTaskRunner implements TaskType{
                 processBuilder
         );
 
-        buildLogger.addBuildLogEntry(String.valueOf(taskContext.getBuildContext().getBuildNumber()));
-        buildLogger.addBuildLogEntry(taskContext.getBuildContext().getBuildKey().toString());
-
+        buildLogger.addBuildLogEntry("APPLITOOLS_BATCH_ID:");
+        buildLogger.addBuildLogEntry(batchId);
         process.execute();
 
         return builder.checkReturnCode(process,0).build();

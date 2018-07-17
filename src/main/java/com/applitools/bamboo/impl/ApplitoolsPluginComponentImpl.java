@@ -1,9 +1,9 @@
 package com.applitools.bamboo.impl;
 
+import com.applitools.bamboo.api.ApplitoolsPluginComponent;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.ApplicationProperties;
-import com.applitools.bamboo.api.ApplitoolsPluginComponent;
 
 import javax.inject.Inject;
 import javax.inject.Named;

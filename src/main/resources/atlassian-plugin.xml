@@ -7,6 +7,16 @@
         <param name="plugin-logo">images/pluginLogo.png</param>
     </plugin-info>
 
+    <xwork key="viewApplitoolsResult" name="View Applitools Result">
+        <package name="ViewApplitoolsResultsXwork" extends="buildView">
+            <action name="viewApplitoolsResult" class="com.applitools.bamboo.ViewApplitoolsResults">
+                <result name="success" type="freemarker">/viewResults/viewApplitoolsResults.ftl</result>
+                <result name="notask" type="freemarker">/viewResults/viewApplitoolsEmptyResults.ftl</result>
+            </action>
+        </package>
+    </xwork>
+
+
     <taskType key="ApplitoolsTestsTask" name="Applitools Tests Task" class="com.applitools.bamboo.ApplitoolsTaskRunner">
         <description>A task that runs Applitools visual tests</description>
         <configuration class="com.applitools.bamboo.ApplitoolsTaskConfigurator"/>
@@ -26,5 +36,16 @@
 
         <context>bamboo-applitools-plugin</context>
     </web-resource>
-    
+
+    <web-item key="ApplitoolsResult:\${planKey}-\${buildNumber}" name="Applitools Result" section="chainResults.subMenu/chainResults" weight="80">
+        <label key="item.applitools.results.label" />
+        <link linkId="ApplitoolsResult:\${planKey}-\${buildNumber}">/chain/result/viewApplitoolsResult.action?planKey=${planKey}&amp;buildNumber=${buildNumber}</link>
+    </web-item>
+
+    <web-item key="ApplitoolsJobResult:\${planKey}-\${buildNumber}" name="Applitools Result" section="results.subMenu/results" weight="80">
+        <label key="item.applitools.results.label" />
+        <link linkId="ApplitoolsJobResult:\${planKey}-\${buildNumber}">/chain/result/viewApplitoolsResult.action?planKey=${planKey}&amp;buildNumber=${buildNumber}</link>
+    </web-item>
+
+
 </atlassian-plugin>

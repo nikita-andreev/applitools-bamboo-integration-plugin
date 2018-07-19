@@ -9,7 +9,7 @@ public class PlanUidUtils {
 
     public static String planKeyWithoutJob(String value) {
         Matcher matcher = REGEXP.matcher(value);
-        if(matcher.find()) {
+        if (matcher.find()) {
             return matcher.group(1);
         } else {
             return value;

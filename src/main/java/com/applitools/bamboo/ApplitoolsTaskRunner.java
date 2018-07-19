@@ -11,19 +11,17 @@ import com.atlassian.utils.process.ExternalProcess;
 import org.jetbrains.annotations.NotNull;
 
 @Scanned
-public class ApplitoolsTaskRunner implements TaskType{
+public class ApplitoolsTaskRunner implements TaskType {
     private static final String BATCH_ID = "APPLITOOLS_BATCH_ID";
     @ComponentImport
     private final ProcessService processService;
 
-    public ApplitoolsTaskRunner(@NotNull final ProcessService processService)
-    {
+    public ApplitoolsTaskRunner(@NotNull final ProcessService processService) {
         this.processService = processService;
     }
 
     @Override
-    public TaskResult execute(final TaskContext taskContext) throws TaskException
-    {
+    public TaskResult execute(final TaskContext taskContext) throws TaskException {
         final TaskResultBuilder builder = TaskResultBuilder.newBuilder(taskContext).success();
         final BuildLogger buildLogger = taskContext.getBuildLogger();
 
@@ -39,7 +37,7 @@ public class ApplitoolsTaskRunner implements TaskType{
 
         EnvVarsParser envVarsParser = new EnvVarsParser(configMap.get(ApplitoolsTaskConfigurator.ENVIRONMENT_VARIABLES));
 
-        if(envVarsParser.isValid()) {
+        if (envVarsParser.isValid()) {
             processBuilder.env(envVarsParser.asMap());
         }
 
@@ -52,7 +50,7 @@ public class ApplitoolsTaskRunner implements TaskType{
         buildLogger.addBuildLogEntry(batchId);
         process.execute();
 
-        return builder.checkReturnCode(process,0).build();
+        return builder.checkReturnCode(process, 0).build();
     }
 
 }

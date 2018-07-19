@@ -8,23 +8,19 @@ import com.atlassian.sal.api.ApplicationProperties;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@ExportAsService ({ApplitoolsPluginComponent.class})
-@Named ("ApplitoolsPluginComponent")
-public class ApplitoolsPluginComponentImpl implements ApplitoolsPluginComponent
-{
+@ExportAsService({ApplitoolsPluginComponent.class})
+@Named("ApplitoolsPluginComponent")
+public class ApplitoolsPluginComponentImpl implements ApplitoolsPluginComponent {
     @ComponentImport
     private final ApplicationProperties applicationProperties;
 
     @Inject
-    public ApplitoolsPluginComponentImpl(final ApplicationProperties applicationProperties)
-    {
+    public ApplitoolsPluginComponentImpl(final ApplicationProperties applicationProperties) {
         this.applicationProperties = applicationProperties;
     }
 
-    public String getName()
-    {
-        if(null != applicationProperties)
-        {
+    public String getName() {
+        if (null != applicationProperties) {
             return "ApplitoolsComponent:" + applicationProperties.getDisplayName();
         }
 

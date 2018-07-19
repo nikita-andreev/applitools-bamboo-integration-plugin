@@ -1,6 +1,5 @@
 package com.applitools.bamboo.api;
 
-public interface ApplitoolsPluginComponent
-{
+public interface ApplitoolsPluginComponent {
     String getName();
 }

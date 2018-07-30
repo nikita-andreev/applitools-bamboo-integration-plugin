@@ -5,10 +5,13 @@ import com.atlassian.bamboo.configuration.ConfigurationMap;
 import com.atlassian.bamboo.process.ExternalProcessBuilder;
 import com.atlassian.bamboo.process.ProcessService;
 import com.atlassian.bamboo.task.*;
+import com.atlassian.bamboo.v2.build.agent.capability.CapabilityContext;
 import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.utils.process.ExternalProcess;
 import org.jetbrains.annotations.NotNull;
+
+import javax.inject.Inject;
 
 @Scanned
 public class ApplitoolsTaskRunner implements TaskType {
@@ -16,8 +19,13 @@ public class ApplitoolsTaskRunner implements TaskType {
     @ComponentImport
     private final ProcessService processService;
 
-    public ApplitoolsTaskRunner(@NotNull final ProcessService processService) {
+    @ComponentImport
+    private final CapabilityContext capabilityContext;
+
+    @Inject
+    public ApplitoolsTaskRunner(@NotNull final ProcessService processService, @NotNull final CapabilityContext capabilityContext) {
         this.processService = processService;
+        this.capabilityContext = capabilityContext;
     }
 
     @Override
@@ -29,6 +37,8 @@ public class ApplitoolsTaskRunner implements TaskType {
         ConfigurationMap configMap = taskContext.getConfigurationMap();
 
         String batchId = PlanUidUtils.getBatchId(taskContext.getBuildContext().getTypedPlanKey().getKey(), taskContext.getBuildContext().getBuildNumber());
+
+
 
         processBuilder.commandFromString(configMap.get(ApplitoolsTaskConfigurator.COMMAND) + " " + configMap.get(ApplitoolsTaskConfigurator.COMMAND_PARAMS))
                 .workingDirectory(taskContext.getWorkingDirectory())

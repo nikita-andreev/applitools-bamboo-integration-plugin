@@ -32,15 +32,18 @@ public class ApplitoolsTaskRunner implements TaskType {
     public TaskResult execute(final TaskContext taskContext) throws TaskException {
         final TaskResultBuilder builder = TaskResultBuilder.newBuilder(taskContext).success();
         final BuildLogger buildLogger = taskContext.getBuildLogger();
+        String executable, execFromCaps, toRun;
 
         ExternalProcessBuilder processBuilder = new ExternalProcessBuilder();
         ConfigurationMap configMap = taskContext.getConfigurationMap();
 
         String batchId = PlanUidUtils.getBatchId(taskContext.getBuildContext().getTypedPlanKey().getKey(), taskContext.getBuildContext().getBuildNumber());
 
+        executable = configMap.get(ApplitoolsTaskConfigurator.COMMAND);
+        execFromCaps = capabilityContext.getCapabilityValue(ApplitoolsTaskConfigurator.CAPABILITY_KEY_PREFIX + executable);
+        toRun = execFromCaps + " " + configMap.get(ApplitoolsTaskConfigurator.COMMAND_PARAMS);
 
-
-        processBuilder.commandFromString(configMap.get(ApplitoolsTaskConfigurator.COMMAND) + " " + configMap.get(ApplitoolsTaskConfigurator.COMMAND_PARAMS))
+        processBuilder.commandFromString(toRun)
                 .workingDirectory(taskContext.getWorkingDirectory())
                 .env(ApplitoolsTaskConfigurator.APPLITOOLS_API_KEY, configMap.get(ApplitoolsTaskConfigurator.APPLITOOLS_API_KEY))
                 .env(BATCH_ID, batchId);

@@ -27,20 +27,31 @@ public class ViewApplitoolsResults extends ChainResultsAction {
 
     private boolean hasApplitoolsTask() {
         Boolean result = false;
-        List<ImmutableJob> allJobs = (List<ImmutableJob>) getChainResult().getImmutablePlan().getAllJobs();
-        for (ImmutableJob job : allJobs) {
-            if (result) {
-                break;
-            }
-            List<TaskDefinition> jobTasks = job.getTaskDefinitions();
-            for (TaskDefinition task : jobTasks) {
-                if (MODULE_KEY == task.getPluginKey() && task.isEnabled()) {
-                    result = true;
+        if(null != getChainResult()) {
+            List<ImmutableJob> allJobs = (List<ImmutableJob>) getChainResult().getImmutablePlan().getAllJobs();
+            for (ImmutableJob job : allJobs) {
+                if (result) {
                     break;
                 }
+                List<TaskDefinition> jobTasks = job.getTaskDefinitions();
+                result = detectApplitoolsTask(jobTasks);
             }
+        } else {
+            List<TaskDefinition> jobTasks =  getResultsSummary().getImmutablePlan().getBuildDefinition().getTaskDefinitions();
+            result = detectApplitoolsTask(jobTasks);
         }
 
+        return result;
+    }
+
+    private boolean detectApplitoolsTask(List<TaskDefinition> jobTasks) {
+        boolean result = false;
+        for (TaskDefinition task : jobTasks) {
+            if (MODULE_KEY == task.getPluginKey() && task.isEnabled()) {
+                result = true;
+                break;
+            }
+        }
         return result;
     }
 }

@@ -144,8 +144,6 @@
             <version>2.5.13-atlassian-7</version>
             <scope>provided</scope>
         </dependency>
-
-
     </dependencies>
 
     <build>

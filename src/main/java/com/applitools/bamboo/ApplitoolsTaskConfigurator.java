@@ -108,7 +108,7 @@ public class ApplitoolsTaskConfigurator extends AbstractTaskConfigurator impleme
         }
 
         errorIfEmpty(APPLITOOLS_API_KEY, APPLITOOLS_API_KEY_ERROR_KEY, params.getString(APPLITOOLS_API_KEY), errorCollection);
-        errorIfEmpty(COMMAND, COMMAND_ERROR_KEY, params.getString(COMMAND), errorCollection);
+
     }
 
 

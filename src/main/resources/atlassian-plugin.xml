@@ -43,6 +43,7 @@
         <link linkId="ApplitoolsResult:\${planKey}-\${buildNumber}">
             /chain/result/viewApplitoolsResult.action?planKey=${planKey}&amp;buildNumber=${buildNumber}
         </link>
+        <condition class="com.applitools.bamboo.ShowLinkConditionChainResults" />
     </web-item>
 
     <web-item key="ApplitoolsJobResult:\${planKey}-\${buildNumber}" name="Applitools Result"
@@ -51,6 +52,7 @@
         <link linkId="ApplitoolsJobResult:\${planKey}-\${buildNumber}">
             /chain/result/viewApplitoolsResult.action?planKey=${planKey}&amp;buildNumber=${buildNumber}
         </link>
+        <condition class="com.applitools.bamboo.ShowLinkConditionJobResults" />
     </web-item>
 
 
